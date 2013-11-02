@@ -46,6 +46,13 @@ PUD_OFF = 0
 PUD_DOWN = 1
 PUD_UP = 2
 
+class Rfm22Error(Exception):
+    u'''Rfm22Error exception class to handle rfm22 specific exceptions.'''
+    def __init__(self, value):
+        self.value = value
+        def __str__(self):
+            return repr(self.value)
+
 def debug_log(x, b= None, c = None):
     u'''Debug print function wrapper.'''
     #return
@@ -63,7 +70,12 @@ def nirq_callback(gpio_id, val):
     RPIO.stop_waiting_for_interrupts()
 
 class Rfm22(threading.Thread):
-    '''Register address definitions'''
+    u'''The Rfm22 class provides functions to send and receive data via the
+    connected RFM22 module. Reception and Transmission of data is done via
+    queues. State machine and event processing and communication with the RFM22 
+    module is completely handled in an extra thread.'''
+    
+    u'''Register address definitions.'''
     __DEVICE_TYPE                           = 0x00
     __DEVICE_VERSION                        = 0x01
     __DEVICE_STATUS                         = 0x02
@@ -321,15 +333,32 @@ class Rfm22(threading.Thread):
         self.__write(self.__OPERATING_FUNCTION_CONTROL_1, 0x09)
         
     def get_rx_data(self, block = True, timeout = None):
+        u'''Function to get data which has been received by
+        the RFM22 module. 
+        @return: List with bytes of one received package. Returns 
+        an empty list if nothing has been received  '''
         try:
             return self.__rx_queue.get(block, timeout)
         except:
             return []
             
     def trigger_tx_event(self):
+        u'''Interrupts the waiting for an NIRQ (External interrupt
+        from RFM22) event. Necessary to send Packet immediately after
+        posting to the queue.'''
         RPIO.stop_waiting_for_interrupts()
         
     def put_tx_data(self, data, block = True, timeout = None ):
+        u'''Checks if the data is in a valid format. Sends the 
+        valid data via the tx queue to the RFM22 handling thread
+        and 
+        @param data: list with bytes. Maximum length = __MAXIMUM_PACKET_LENGTH
+        @param block: @see queue.put function.
+        @param timeout: @see queue.put function. '''
+        for x in data:
+            if (x < 0 or x > 255):
+                raise Rfm22Error('List can only contain bytes with value between 0 and 255!')
+        
         self.__tx_queue.put(data, block, timeout)
         u'''Stop waiting for nirq event.'''
         self.trigger_tx_event()
