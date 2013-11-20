@@ -25,4 +25,4 @@ description.
 Donation:
 ---------
 If find my code usefull. You can send me some money via Bitcoin:
-Bitcoin adress:  15aRW8nWhL8bVvUUQ423pG1zMGCkBxNAd3
+Bitcoin adress:  1A9jgbDz5vZK4bgnUgEkSjL3VK4vb4bBka
