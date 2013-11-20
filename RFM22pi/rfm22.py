@@ -368,7 +368,7 @@ class Rfm22(threading.Thread):
         the rfm22 module
         '''
         wiringpi.wiringPiSetup() 
-        wiringpi.wiringPiSPISetup(RFM22_SPI_CHANNEL,5000000) 
+        wiringpi.wiringPiSPISetup(RFM22_SPI_CHANNEL,10000000) 
         RPIO.setup(RFM22_NIRQ_GPIO_BCM_PIN, RPIO.IN)
         RPIO.cleanup_interrupts()
         RPIO.add_interrupt_callback(RFM22_NIRQ_GPIO_BCM_PIN, nirq_callback, edge='falling')
