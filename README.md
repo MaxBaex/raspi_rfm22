@@ -21,3 +21,8 @@ Get the wiringPi Module for Python: https://github.com/WiringPi/WiringPi2-Python
 Connect the RFM22 Module to the GPIO Header. See code for detailed wiring 
 description. 
 
+
+Donation:
+---------
+If find my code usefull. You can send me some money via Bitcoin:
+Bitcoin adress:  15aRW8nWhL8bVvUUQ423pG1zMGCkBxNAd3
