@@ -34,11 +34,8 @@ Usage example:
     
     u'''Send some data via RFM22. '''
     data = [10,20,30,40,50,60,70,80,90,100]
-    for i in range(10):
-        time.sleep(0.2)
-        radio.put_tx_data(data, block=False)
-        print "put to queue"
-        
+    radio.put_tx_data(data, block=False)
+
     u'''Receive data from RFM22'''
     #while(True):
         #data = radio.get_rx_data(block = True)
