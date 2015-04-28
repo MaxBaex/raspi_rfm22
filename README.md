@@ -47,5 +47,5 @@ Usage example:
 
 Donation:
 ---------
-If find my code usefull. You can send me some money via Bitcoin:
+If find my code usefull. You can send me some Bitcoin:
 Bitcoin adress:  1A9jgbDz5vZK4bgnUgEkSjL3VK4vb4bBka
