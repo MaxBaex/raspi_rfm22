@@ -44,8 +44,3 @@ Usage example:
     u'''Join RFM22 thread.'''
     radio.join()
     
-
-Donation:
----------
-If find my code usefull. You can send me some Bitcoin:
-Bitcoin adress:  1A9jgbDz5vZK4bgnUgEkSjL3VK4vb4bBka
